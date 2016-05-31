@@ -2,7 +2,6 @@ package com.example.asad.quizapplication;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 public class QuizScreen extends AppCompatActivity {
 
@@ -150,19 +148,19 @@ public class QuizScreen extends AppCompatActivity {
         });
 
 
-        new CountDownTimer(12000, 1000) { // adjust the milli seconds here
-
-            public void onTick(long millisUntilFinished) {
-                timerTextView.setText(""+String.format("%d min, %d sec",
-                        TimeUnit.MILLISECONDS.toMinutes( millisUntilFinished),
-                        TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
-                                TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
-            }
-
-            public void onFinish() {
-                Toast.makeText(QuizScreen.this, "Times Up", Toast.LENGTH_SHORT).show();
-            }
-        }.start();
+//        new CountDownTimer(12000, 1000) { // adjust the milli seconds here
+//
+//            public void onTick(long millisUntilFinished) {
+//                timerTextView.setText(""+String.format("%d min, %d sec",
+//                        TimeUnit.MILLISECONDS.toMinutes( millisUntilFinished),
+//                        TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
+//                                TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
+//            }
+//
+//            public void onFinish() {
+//                Toast.makeText(QuizScreen.this, "Times Up", Toast.LENGTH_SHORT).show();
+//            }
+//        }.start();
 
     }
 }
