@@ -2,6 +2,7 @@ package com.example.asad.quizapplication;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class QuizScreen extends AppCompatActivity {
 
@@ -33,6 +35,7 @@ public class QuizScreen extends AppCompatActivity {
     private LinearLayout questionsLinearLayout;
     private ArrayList<QuizDatabase.Question> questions;
     private String answer;
+    private CountDownTimer timer;
 
     public class QuizAdapter extends ArrayAdapter<QuizDatabase.Quiz>{
 
@@ -59,6 +62,14 @@ public class QuizScreen extends AppCompatActivity {
             }
 
             return convertView;
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (timer != null){
+            timer.cancel();
         }
     }
 
@@ -93,6 +104,32 @@ public class QuizScreen extends AppCompatActivity {
                 optionBBtn.setText(question.option.optionB);
                 optionCBtn.setText(question.option.optionC);
                 optionDBtn.setText(question.option.optionD);
+
+
+                timer = new CountDownTimer(120000, 1000) { // adjust the milli seconds here
+
+                    public void onTick(long millisUntilFinished) {
+                        timerTextView.setText(""+String.format("%d min, %d sec",
+                                TimeUnit.MILLISECONDS.toMinutes( millisUntilFinished),
+                                TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
+                                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
+                    }
+
+                    public void onFinish() {
+                        for (int i = questionCounter; i < answers.length; i++) {
+                            if (answers[i] == null){
+                                answers[i] = "";
+                            }
+                        }
+
+                        int score = db.CheckResult(quiz.pkQuizId, 1, answers);
+                        Toast.makeText(QuizScreen.this, "Times Up: Your Score: " + score, Toast.LENGTH_LONG).show();
+                        QuizScreen.this.finish();
+
+                    }
+                };
+
+                timer.start();
 
             }
         });
@@ -138,7 +175,7 @@ public class QuizScreen extends AppCompatActivity {
                 }else{
                     question = questions.get(questionCounter);
                     questionTextView.setText(question.question);
-                    questionCounterTextView.setText(questionCounter + "/" + quiz.numberOfQuestions);
+                    questionCounterTextView.setText(questionCounter + 1 + "/" + quiz.numberOfQuestions);
                     optionABtn.setText(question.option.optionA);
                     optionBBtn.setText(question.option.optionB);
                     optionCBtn.setText(question.option.optionC);
@@ -146,21 +183,5 @@ public class QuizScreen extends AppCompatActivity {
                 }
             }
         });
-
-
-//        new CountDownTimer(12000, 1000) { // adjust the milli seconds here
-//
-//            public void onTick(long millisUntilFinished) {
-//                timerTextView.setText(""+String.format("%d min, %d sec",
-//                        TimeUnit.MILLISECONDS.toMinutes( millisUntilFinished),
-//                        TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
-//                                TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
-//            }
-//
-//            public void onFinish() {
-//                Toast.makeText(QuizScreen.this, "Times Up", Toast.LENGTH_SHORT).show();
-//            }
-//        }.start();
-
     }
 }

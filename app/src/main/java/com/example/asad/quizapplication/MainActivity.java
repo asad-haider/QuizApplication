@@ -20,4 +20,9 @@ public class MainActivity extends AppCompatActivity {
     public void playQuiz(View view) {
         startActivity(new Intent(this, QuizScreen.class));
     }
+
+    public void exitApplication(View view) {
+        finish();
+        System.exit(0);
+    }
 }

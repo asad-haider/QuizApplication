@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,33 +7,54 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.asad.quizapplication.MainActivity">
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context="com.example.asad.quizapplication.MainActivity"
+    >
 
 
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create Your Quiz"
-        android:id="@+id/createQuiz"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="createQuiz" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Play Quiz"
-        android:id="@+id/playBtn"
-        android:layout_above="@+id/createQuiz"
-        android:layout_centerHorizontal="true"
-        android:onClick="playQuiz"
+        android:text="Quiz Application"
+        android:layout_marginBottom="50dp"
+        android:textSize="50dp"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:textColor="#1A237E"
         />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Play Quiz"
+        android:id="@+id/playBtn"
+        android:onClick="playQuiz"
+        android:padding="20dp"
+        android:layout_margin="5dp"
+        android:background="#3D5AFE"
+        android:textColor="#FFFFFF" />
+
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Create Your Quiz"
+        android:id="@+id/createQuiz"
+        android:onClick="createQuiz"
+        android:padding="20dp"
+        android:layout_margin="5dp"
+        android:background="#3D5AFE"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="Exit"
         android:id="@+id/exitBtn"
-        android:layout_below="@+id/createQuiz"
-        android:layout_centerHorizontal="true" />
-</RelativeLayout>
+        android:padding="20dp"
+        android:layout_margin="5dp"
+        android:background="#3D5AFE"
+        android:textColor="#FFFFFF"
+        android:onClick="exitApplication" />
+</LinearLayout>
